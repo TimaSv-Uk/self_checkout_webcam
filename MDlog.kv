@@ -1,0 +1,44 @@
+<MyMDLog>
+    FloatLayout:
+        size:root.width, root.height
+        MDCard:
+            size_hint: None, None
+            size: 300,400
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            elevation: 10
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+            MDLabel:
+                text: 'WELCOM'
+            MDTextField:
+                id: user
+                hint_text: "username"
+                size_hint_x: None
+                required: True
+                width: 200
+                icon_right: "account"
+                font_size: 18
+                padding: 25
+                pos_hint: {'center_x': .5}
+            MDTextField:
+                id: password
+                hint_text: "password"
+                password:True
+                required: True
+                size_hint_x: None
+                width: 200
+                icon_right: "key"
+                font_size: 18
+                padding: 25
+                pos_hint: {'center_x': .5}
+            MDRoundFlatButton:
+                text: "LOG IN"
+                font_size: 12
+                pos_hint: {'center_x': .5}
+                on_press: root.login()
+            MDRoundFlatButton:
+                text: "CLEAR"
+                font_size: 12
+                pos_hint: {'center_x': .5}
+                on_press: root.clear()

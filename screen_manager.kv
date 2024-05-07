@@ -1,0 +1,51 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+WindowManager:
+    LoginWindow:
+        name:"login"
+    ScanWindow:
+        name: "main"
+    CatalogWindow:
+        name:"catalogue"
+    Menu:
+        name:"menu"
+
+<WindowManager>:
+    transition: NoTransition()
+
+<CatalogWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_y: 1
+        Menu:
+            size_hint_y: 0.1
+        MDBoxLayout:
+            size_hint_y: 0.9
+
+<LoginWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_y: 1
+        MyMDLog:
+
+
+<ScanWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 1
+        Menu:
+            size_hint: 1, 0.1
+        MyCamera:
+            size_hint: 1, 0.9
+
+
+<Menu>:
+    MDTopAppBar:
+        id: app_bar
+        title: "Auto cashier"
+        anchor_title: "left"
+        right_action_items: 
+            [
+            ["menu", lambda x: root.get_menu_items(), "menu"],
+            ]
+
+

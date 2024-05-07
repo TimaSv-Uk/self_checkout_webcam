@@ -1,0 +1,64 @@
+#:import utils kivy.utils
+<Label>
+    font_size: 32
+    color:utils.get_color_from_hex("#000000")
+<Button>
+    font_size: 32
+    color:utils.get_color_from_hex("#ffffff")
+
+<MyCamera>
+    #name:name
+    MDBoxLayout:
+        orientation: "horizontal"
+        padding: 10
+        size:root.width, root.height
+
+        MDBoxLayout:
+
+            orientation: "horizontal"
+
+            MDBoxLayout:
+
+                orientation: "vertical"
+                canvas.before:
+                    Color:
+                        rgba: .5, .5, .5, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
+                padding: 10
+
+                #Camera:
+                #   id: camera
+                #   resolution: (640, 480)
+                #   play: False
+                ToggleButton:
+                    text: 'Play'
+                    on_press: root.toggle_cam()
+                MDLabel:
+                    id:selected_product
+                    text: "Info on product"
+                    canvas.before:
+            MDScrollView:
+                MDBoxLayout:
+                    id:product_list
+                    orientation: "vertical" 
+                    size_hint_y: None
+                    height: self.minimum_height  # Set the height to allow scrolling
+                    canvas.before:
+                        Color:
+                            rgba: .5, .5, .5, 1
+                        Line:
+                            width: 2
+                            rectangle: self.x, self.y, self.width, self.height
+
+
+            MDBoxLayout:
+
+                orientation: "vertical"
+                Button: 
+                    on_press:root.press()
+                    text:"Get check"
+                Button: 
+                    text:"Cansel"
+                    on_press: root.cancel()

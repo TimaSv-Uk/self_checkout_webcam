@@ -1,0 +1,1 @@
+Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Initial Catalog=AUTO_CASHIER;Data Source=GIORNO\SQLEXPRESS
