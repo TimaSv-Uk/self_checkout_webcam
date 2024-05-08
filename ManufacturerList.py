@@ -15,7 +15,9 @@ import pyodbc
 class ManufacturerList(MDWidget):
     def open_manufacturer_list(self):
         if not hasattr(self, "data_tables"):
-            products = MDApp.get_running_app().select_as_dick("select * from manufacturer;")
+            products = MDApp.get_running_app().select_as_dick(
+                "select * from manufacturer;"
+            )
             self.data_tables = MDDataTable(
                 use_pagination=True,
                 size_hint=(1, 0.6),

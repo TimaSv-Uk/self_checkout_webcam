@@ -7,6 +7,8 @@ from kivymd.uix.snackbar import MDSnackbar
 from kivymd.uix.widget import MDWidget
 from PIL import Image
 from pyzbar.pyzbar import decode
+import random
+import string
 
 
 class MyCamera(MDWidget):
@@ -74,6 +76,7 @@ class MyCamera(MDWidget):
         self.ids.product_list.add_widget(check_item)
 
     def cancel(self):
+        self.get_unique_check_id()
         for _, wdg in self.product_on_screan.items():
             self.ids.product_list.remove_widget(wdg)
         self.product_on_screan = {}
@@ -147,4 +150,46 @@ class MyCamera(MDWidget):
 
     # TODO:
     def get_check(self):
+        for index, check_line in enumerate(self.data):
+            MDApp.get_running_app().cursor.execute(
+                """
+                INSERT INTO check_line (SKU, product_name, line_number, check_id)
+                VALUES (?, ?, ?,
+                        ?, ?);
+            """,
+                check_line["sku"],
+                check_line["quantity_in_check"],
+                index + 1,
+                self.get_unique_check_id(),
+            )
+            MDApp.get_running_app().conn.commit()
+            # MDApp.get_running_app().cursor.execute(
+            #     """
+            #     INSERT INTO product (SKU, product_name, id_category, id_manufacturer, product_description)
+            #     VALUES (?, ?, ?,
+            #             ?, ?);
+            # """,
+            #     new_product[0],
+            #     new_product[1],
+            #     new_product[2],
+            #     new_product[3],
+            #     new_product[4],
+            # )
+            # MDApp.get_running_app().conn.commit()
         pass
+
+    def get_unique_check_id(self):
+        check_ids = MDApp.get_running_app().cursor.execute(
+            "select сheck_id from final_сheck;"
+        )
+        check_ids = [id[0] for id in check_ids.fetchall()]
+        unique_string = "".join(
+            random.choices(string.ascii_letters + string.digits, k=15)
+        )
+        while True:
+            if unique_string not in check_ids:
+                break
+            unique_string = "".join(
+                random.choices(string.ascii_letters + string.digits, k=15)
+            )
+        return unique_string
