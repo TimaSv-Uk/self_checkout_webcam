@@ -38,7 +38,15 @@
                 MDLabel:
                     id:selected_product
                     text: "Info on product"
-                    canvas.before:
+
+                MDTextField:
+                    id:prod_sku
+                    hint_text: "SKU/name"
+                MDRoundFlatButton:
+                    text: "add product by SKU/name"
+                    font_size: 12
+                    pos_hint: {'center_x': .5}
+                    on_press: root.add_product_to_check(prod_sku.text.strip())
             MDScrollView:
                 MDBoxLayout:
                     id:product_list
@@ -57,7 +65,7 @@
 
                 orientation: "vertical"
                 Button: 
-                    on_press:root.press()
+                    on_press:root.get_check()
                     text:"Get check"
                 Button: 
                     text:"Cansel"
