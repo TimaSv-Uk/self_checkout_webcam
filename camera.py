@@ -12,7 +12,7 @@ import string
 import datetime
 
 
-class MyCamera(MDWidget):
+class CashRegister(MDWidget):
     data = {}
     product_labels = {}
     product_on_screan = {}
@@ -151,36 +151,32 @@ class MyCamera(MDWidget):
 
     # TODO:
     def get_check(self):
-        check_id = self.get_unique_check_id()
-        print(
-            check_id,
-            datetime.date.today(),
-            datetime.datetime.now().time(),
-        )
-        MDApp.get_running_app().cursor.execute(
-            """
-            INSERT INTO final_сheck (сheck_id, sale_date ,sale_time)
-            VALUES (?, ?, ?);
-            """,
-            check_id,
-            datetime.date.today(),
-            datetime.datetime.now().time(),
-        )
-        MDApp.get_running_app().conn.commit()
-        for index, product_name in enumerate(self.data):
-            print(self.data[product_name])
+        if len(self.data) > 0:
+            check_id = self.get_unique_check_id()
             MDApp.get_running_app().cursor.execute(
                 """
-                INSERT INTO check_line (SKU, quantity_sold, line_number, check_id)
-                VALUES (?, ?, ?, ?);
+                INSERT INTO final_сheck (сheck_id, sale_date ,sale_time)
+                VALUES (?, ?, ?);
                 """,
-                self.data[product_name]["sku"],
-                self.data[product_name]["quantity_in_check"],
-                index + 1,
                 check_id,
+                datetime.date.today(),
+                datetime.datetime.now().time(),
             )
             MDApp.get_running_app().conn.commit()
-        self.cancel()
+            for index, product_name in enumerate(self.data):
+                print(self.data[product_name])
+                MDApp.get_running_app().cursor.execute(
+                    """
+                    INSERT INTO check_line (SKU, quantity_sold, line_number, check_id)
+                    VALUES (?, ?, ?, ?);
+                    """,
+                    self.data[product_name]["sku"],
+                    self.data[product_name]["quantity_in_check"],
+                    index + 1,
+                    check_id,
+                )
+                MDApp.get_running_app().conn.commit()
+            self.cancel()
 
     def get_unique_check_id(self):
         check_ids = MDApp.get_running_app().cursor.execute(

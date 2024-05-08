@@ -5,7 +5,7 @@ from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 from kivymd.uix.snackbar import MDSnackbar
 
-from camera import MyCamera
+from camera import CashRegister
 from MDlog import MyMDLog
 from ManufacturerList import ManufacturerList
 from CategoryList import CategoryList
