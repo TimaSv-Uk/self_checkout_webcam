@@ -124,12 +124,12 @@ class MainApp(MDApp):
         # self.PASSWORD = password
 
         # text cashier
-        # self.PASSWORD = "bob"
-        # self.USERNAME = "bob"
+        self.PASSWORD = "bob"
+        self.USERNAME = "bob"
 
         # text manager
-        self.USERNAME = "nick"
-        self.PASSWORD = "0000"
+        # self.USERNAME = "nick"
+        # self.PASSWORD = "0000"
         try:
             file = open("connect.txt", "r")
             connection_string = file.readline()

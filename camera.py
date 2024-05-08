@@ -9,6 +9,7 @@ from PIL import Image
 from pyzbar.pyzbar import decode
 import random
 import string
+import datetime
 
 
 class MyCamera(MDWidget):
@@ -150,33 +151,36 @@ class MyCamera(MDWidget):
 
     # TODO:
     def get_check(self):
-        for index, check_line in enumerate(self.data):
+        check_id = self.get_unique_check_id()
+        print(
+            check_id,
+            datetime.date.today(),
+            datetime.datetime.now().time(),
+        )
+        MDApp.get_running_app().cursor.execute(
+            """
+            INSERT INTO final_сheck (сheck_id, sale_date ,sale_time)
+            VALUES (?, ?, ?);
+            """,
+            check_id,
+            datetime.date.today(),
+            datetime.datetime.now().time(),
+        )
+        MDApp.get_running_app().conn.commit()
+        for index, product_name in enumerate(self.data):
+            print(self.data[product_name])
             MDApp.get_running_app().cursor.execute(
                 """
-                INSERT INTO check_line (SKU, product_name, line_number, check_id)
-                VALUES (?, ?, ?,
-                        ?, ?);
-            """,
-                check_line["sku"],
-                check_line["quantity_in_check"],
+                INSERT INTO check_line (SKU, quantity_sold, line_number, check_id)
+                VALUES (?, ?, ?, ?);
+                """,
+                self.data[product_name]["sku"],
+                self.data[product_name]["quantity_in_check"],
                 index + 1,
-                self.get_unique_check_id(),
+                check_id,
             )
             MDApp.get_running_app().conn.commit()
-            # MDApp.get_running_app().cursor.execute(
-            #     """
-            #     INSERT INTO product (SKU, product_name, id_category, id_manufacturer, product_description)
-            #     VALUES (?, ?, ?,
-            #             ?, ?);
-            # """,
-            #     new_product[0],
-            #     new_product[1],
-            #     new_product[2],
-            #     new_product[3],
-            #     new_product[4],
-            # )
-            # MDApp.get_running_app().conn.commit()
-        pass
+        self.cancel()
 
     def get_unique_check_id(self):
         check_ids = MDApp.get_running_app().cursor.execute(
