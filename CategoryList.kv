@@ -1,0 +1,17 @@
+<CategoryList>:
+    size:root.width, root.height
+
+    MDBoxLayout:
+        id:category_list
+        size:root.width, root.height
+        orientation: "vertical"
+        size_hint: 1, 1
+
+        MDBoxLayout:
+            orientation: "horizontal"
+
+            size_hint: 1, 0.1
+            MDRoundFlatButton:
+                text:"add new category"
+                on_press: root.open_new_category_form()
+

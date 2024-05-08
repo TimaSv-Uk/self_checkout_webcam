@@ -6,6 +6,12 @@ WindowManager:
         name: "main"
     CatalogWindow:
         name:"catalogue"
+    ManufacturerWindow:
+        name:"manufacturer"
+    SupplierWindow:
+        name:"supplier"
+    CategoryWindow:
+        name:"category"
     Menu:
         name:"menu"
 
@@ -19,6 +25,36 @@ WindowManager:
         Menu:
             size_hint_y: 0.1
         ProductList:
+            id:ProductList
+            size_hint_y: 0.9
+
+<ManufacturerWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_y: 1
+        Menu:
+            size_hint_y: 0.1
+        ManufacturerList:
+            id:ManufacturerList
+            size_hint_y: 0.9
+
+<SupplierWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_y: 1
+        Menu:
+            size_hint_y: 0.1
+        SupplierList:
+            id:SupplierList
+            size_hint_y: 0.9
+<CategoryWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_y: 1
+        Menu:
+            size_hint_y: 0.1
+        CategoryList:
+            id:CategoryList
             size_hint_y: 0.9
 
 <LoginWindow>:

@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivymd.uix.widget import MDWidget
 
+
 class MyMDLog(MDWidget):
     def login(self):
         MDApp.get_running_app().connect_to_db(

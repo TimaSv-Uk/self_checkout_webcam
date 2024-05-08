@@ -1,13 +1,12 @@
-from kivymd.app import MDApp
-from kivymd.uix.widget import MDWidget
 from kivy.clock import Clock
-from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.uix.button import Button
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.snackbar import MDSnackbar
-
-from pyzbar.pyzbar import decode
+from kivymd.uix.widget import MDWidget
 from PIL import Image
+from pyzbar.pyzbar import decode
 
 
 class MyCamera(MDWidget):

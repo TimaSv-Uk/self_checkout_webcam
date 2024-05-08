@@ -1,14 +1,16 @@
-from kivymd.app import MDApp
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.uix.snackbar import MDSnackbar
-from kivymd.uix.label import MDLabel
-from kivy.lang import Builder
-
 import pyodbc
+from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivymd.app import MDApp
+from kivymd.uix.label import MDLabel
+from kivymd.uix.snackbar import MDSnackbar
 
-from ProductList import ProductList
 from camera import MyCamera
 from MDlog import MyMDLog
+from ManufacturerList import ManufacturerList
+from CategoryList import CategoryList
+from SupplierList import SupplierList
+from ProductList import ProductList
 
 
 class Menu(Screen):
@@ -43,6 +45,21 @@ class Menu(Screen):
                     lambda x: self.open_screan("catalogue"),
                     "add invoice",
                 ],
+                [
+                    "factory",
+                    lambda x: self.open_screan("manufacturer"),
+                    "add manufacturer",
+                ],
+                [
+                    "account-cash",
+                    lambda x: self.open_screan("supplier"),
+                    "add supplier",
+                ],
+                [
+                    "shape",
+                    lambda x: self.open_screan("category"),
+                    "add category",
+                ],
             ]
 
     def open_screan(self, screan_name: str):
@@ -52,8 +69,24 @@ class Menu(Screen):
         ]
 
 
+class ManufacturerWindow(Screen):
+    def on_pre_enter(self):
+        self.ids.ManufacturerList.open_manufacturer_list()
+
+
+class SupplierWindow(Screen):
+    def on_pre_enter(self):
+        self.ids.SupplierList.open_manufacturer_list()
+
+
+class CategoryWindow(Screen):
+    def on_pre_enter(self):
+        self.ids.CategoryList.open_category_list()
+
+
 class CatalogWindow(Screen):
-    pass
+    def on_pre_enter(self):
+        self.ids.ProductList.open_product_list()
 
 
 class LoginWindow(Screen):
@@ -70,6 +103,9 @@ class WindowManager(ScreenManager):
 
 Builder.load_file("MDlog.kv")
 Builder.load_file("ProductList.kv")
+Builder.load_file("ManufacturerList.kv")
+Builder.load_file("SupplierList.kv")
+Builder.load_file("CategoryList.kv")
 Builder.load_file("camera.kv")
 
 
@@ -144,4 +180,5 @@ class MainApp(MDApp):
             ).open()
 
 
-MainApp().run()
+if __name__ == "__main__":
+    MainApp().run()
