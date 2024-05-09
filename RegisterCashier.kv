@@ -1,0 +1,79 @@
+<RegisterCashier>
+    FloatLayout:
+        size:root.width, root.height
+        MDBoxLayout:
+            orientation: "horizontal"
+            padding: 25
+            spacing: 25
+            pos_hint: {'center_x': 0.65, 'center_y': 0.5}
+            MDCard:
+                size_hint: None, None
+                size: 300,400
+                pos_hint: {'center_x': 0.1, 'center_y': 0.5}
+                elevation: 1
+                padding: 25
+                spacing: 25
+                orientation: 'vertical'
+                MDLabel:
+                    text: 'add cashier'
+                MDTextField:
+                    id: user
+                    hint_text: "new cashier"
+                    size_hint_x: None
+                    required: True
+                    width: 200
+                    icon_right: "account"
+                    font_size: 18
+                    padding: 25
+                    pos_hint: {'center_x': .5}
+                MDTextField:
+                    id: password
+                    hint_text: "password"
+                    password:True
+                    required: True
+                    size_hint_x: None
+                    width: 200
+                    icon_right: "key"
+                    font_size: 18
+                    padding: 25
+                    pos_hint: {'center_x': .5}
+                MDRoundFlatButton:
+                    text: "REGISTER CASHIER"
+                    font_size: 12
+                    pos_hint: {'center_x': .5}
+                    on_press: root.register_cashier()
+                MDRoundFlatButton:
+                    text: "CLEAR"
+                    font_size: 12
+                    pos_hint: {'center_x': .5}
+                    on_press: root.clear()
+            MDCard:
+                size_hint: None, None
+                size: 300,400
+                pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+                elevation: 1
+                padding: 25
+                spacing: 25
+                orientation: 'vertical'
+                MDLabel:
+                    text: 'delete cashier'
+                MDTextField:
+                    id: remove_user_name
+                    hint_text: "remove with name"
+                    size_hint_x: None
+                    required: True
+                    width: 200
+                    icon_right: "account"
+                    font_size: 18
+                    padding: 25
+                    pos_hint: {'center_x': .5}
+                MDRoundFlatButton:
+                    text: "DELETE CASHIER"
+                    font_size: 12
+                    pos_hint: {'center_x': .5}
+                    on_press: root.delete_cashier()
+                MDRoundFlatButton:
+                    text: "CLEAR"
+                    font_size: 12
+                    pos_hint: {'center_x': .5}
+                    on_press: root.clear()

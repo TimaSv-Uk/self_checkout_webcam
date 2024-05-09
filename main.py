@@ -11,6 +11,7 @@ from ManufacturerList import ManufacturerList
 from CategoryList import CategoryList
 from SupplierList import SupplierList
 from ProductList import ProductList
+from RegisterCashier import RegisterCashier
 
 
 class Menu(Screen):
@@ -18,7 +19,7 @@ class Menu(Screen):
         if MDApp.get_running_app().role == "Cashier":
             self.ids.app_bar.right_action_items = [
                 [
-                    "cart-outline",
+                    "cash-register",
                     lambda x: self.open_screan("main"),
                     "main",
                 ],
@@ -31,7 +32,7 @@ class Menu(Screen):
         elif MDApp.get_running_app().role == "Manager":
             self.ids.app_bar.right_action_items = [
                 [
-                    "cart-outline",
+                    "cash-register",
                     lambda x: self.open_screan("main"),
                     "main",
                 ],
@@ -60,6 +61,12 @@ class Menu(Screen):
                     lambda x: self.open_screan("category"),
                     "add category",
                 ],
+                [
+                    "account-plus",
+                    lambda x: self.open_screan("register_cashier"),
+                    "manage cashier",
+                ],
+
             ]
 
     def open_screan(self, screan_name: str):
@@ -89,6 +96,9 @@ class CatalogWindow(Screen):
         self.ids.ProductList.open_product_list()
 
 
+class RegisterCashierWindow(Screen):
+    pass
+
 class LoginWindow(Screen):
     pass
 
@@ -107,6 +117,7 @@ Builder.load_file("ManufacturerList.kv")
 Builder.load_file("SupplierList.kv")
 Builder.load_file("CategoryList.kv")
 Builder.load_file("camera.kv")
+Builder.load_file("RegisterCashier.kv")
 
 
 class MainApp(MDApp):
@@ -124,12 +135,12 @@ class MainApp(MDApp):
         # self.PASSWORD = password
 
         # text cashier
-        self.PASSWORD = "bob"
-        self.USERNAME = "bob"
+        # self.PASSWORD = "bob"
+        # self.USERNAME = "bob"
 
         # text manager
-        # self.USERNAME = "nick"
-        # self.PASSWORD = "0000"
+        self.USERNAME = "nick"
+        self.PASSWORD = "0000"
         try:
             file = open("connect.txt", "r")
             connection_string = file.readline()

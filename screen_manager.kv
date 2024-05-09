@@ -12,6 +12,8 @@ WindowManager:
         name:"supplier"
     CategoryWindow:
         name:"category"
+    RegisterCashierWindow:
+        name:"register_cashier"
     Menu:
         name:"menu"
 
@@ -57,6 +59,15 @@ WindowManager:
             id:CategoryList
             size_hint_y: 0.9
 
+
+<RegisterCashierWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_y: 1
+        Menu:
+            size_hint_y: 0.1
+        RegisterCashier:
+        
 <LoginWindow>:
     MDBoxLayout:
         orientation: "vertical"
