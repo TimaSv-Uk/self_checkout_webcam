@@ -5,8 +5,9 @@ from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 from kivymd.uix.snackbar import MDSnackbar
 
-from camera import CashRegister
+from CashRegister import CashRegister
 from MDlog import MyMDLog
+from InvoiceList import InvoiceList
 from ManufacturerList import ManufacturerList
 from CategoryList import CategoryList
 from SupplierList import SupplierList
@@ -43,7 +44,7 @@ class Menu(Screen):
                 ],
                 [
                     "format-list-bulleted-square",
-                    lambda x: self.open_screan("catalogue"),
+                    lambda x: self.open_screan("invoice"),
                     "add invoice",
                 ],
                 [
@@ -66,7 +67,6 @@ class Menu(Screen):
                     lambda x: self.open_screan("register_cashier"),
                     "manage cashier",
                 ],
-
             ]
 
     def open_screan(self, screan_name: str):
@@ -99,6 +99,7 @@ class CatalogWindow(Screen):
 class RegisterCashierWindow(Screen):
     pass
 
+
 class LoginWindow(Screen):
     pass
 
@@ -106,6 +107,8 @@ class LoginWindow(Screen):
 class ScanWindow(Screen):
     pass
 
+class InvoiceWindow(Screen):
+    pass
 
 class WindowManager(ScreenManager):
     pass
@@ -116,7 +119,8 @@ Builder.load_file("ProductList.kv")
 Builder.load_file("ManufacturerList.kv")
 Builder.load_file("SupplierList.kv")
 Builder.load_file("CategoryList.kv")
-Builder.load_file("camera.kv")
+Builder.load_file("InvoiceList.kv")
+Builder.load_file("CashRegister.kv")
 Builder.load_file("RegisterCashier.kv")
 
 

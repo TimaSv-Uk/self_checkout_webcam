@@ -149,7 +149,6 @@ class CashRegister(MDWidget):
             return None
         return result
 
-    # TODO:
     def get_check(self):
         if len(self.data) > 0:
             check_id = self.get_unique_check_id()

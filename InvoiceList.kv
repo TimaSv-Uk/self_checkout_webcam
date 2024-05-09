@@ -1,0 +1,60 @@
+#:import utils kivy.utils
+<Label>
+    font_size: 32
+    color:utils.get_color_from_hex("#000000")
+<Button>
+    font_size: 32
+    color:utils.get_color_from_hex("#ffffff")
+
+<InvoiceList>
+    #name:name
+    MDBoxLayout:
+        orientation: "horizontal"
+        padding: 10
+        size:root.width, root.height
+
+        size_hint_x: 1
+        MDScrollView:
+
+            size_hint_x: .7
+            MDBoxLayout:
+                id:invoice_list
+                orientation: "vertical" 
+
+                size_hint_y: None
+                height: self.minimum_height  # Set the height to allow scrolling
+                canvas.before:
+                    Color:
+                        rgba: .5, .5, .5, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+
+            size_hint_x: .3
+            MDBoxLayout:
+                orientation: "vertical"
+                canvas.before:
+                    Color:
+                        rgba: .5, .5, .5, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
+                padding: 10
+                MDTextField:
+                    id:prod_sku
+                    hint_text: "SKU/name"
+                MDRoundFlatButton:
+                    text: "add product toinvoice by SKU/name"
+                    font_size: 12
+                    pos_hint: {'center_x': .5}
+                    on_press: root.add_invoice_line(prod_sku.text.strip())
+            Button: 
+                on_press:root.add_invoice()
+                text:"Add invoice"
+            Button: 
+                text:"Cansel"
+                on_press: root.cancel()
