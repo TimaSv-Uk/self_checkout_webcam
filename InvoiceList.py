@@ -27,6 +27,8 @@ class InvoiceList(MDWidget):
             ).open()
             return
 
+        while product_name in self.data.keys():
+            product_name = f"{product_name}+"
         sku = invoice_info[0]
 
         self.data[product_name] = {
@@ -35,7 +37,6 @@ class InvoiceList(MDWidget):
         }
         check_item = MDBoxLayout(size_hint_y=None)
         check_item.add_widget(MDLabel(id="product_name", text=f"{product_name}"))
-
         check_item.add_widget(
             MDTextField(id="supplier_id", hint_text="supplier id", max_text_length=3)
         )
@@ -61,11 +62,9 @@ class InvoiceList(MDWidget):
         self.ids.invoice_list.add_widget(check_item)
 
     def cancel(self):
-        self.get_unique_invoice_id()
         for _, wdg in self.invoice_on_screan.items():
             self.ids.invoice_list.remove_widget(wdg)
         self.invoice_on_screan = {}
-        self.invoice_labels = {}
         self.data = {}
 
     def add_invoice(self):
@@ -141,6 +140,4 @@ class InvoiceList(MDWidget):
                     WHERE product.SKU = ? OR product.product_name = ?;"""
         cursor.execute(query, sku, sku)
         result = cursor.fetchone()
-        if result and result[1] in self.data.keys():
-            return None
         return result
