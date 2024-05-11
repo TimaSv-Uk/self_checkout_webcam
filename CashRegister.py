@@ -12,21 +12,18 @@ import string
 import datetime
 
 
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+import os
+
+
 class CashRegister(MDWidget):
     data = {}
     product_labels = {}
     product_on_screan = {}
 
-    # Camera:
-    #     id: camera
-    #     resolution: (640, 480)
-    #     play: False
-    # ToggleButton:
-    #     text: 'Play'
-    #     on_press: root.toggle_cam()
     def add_product_to_check(self, product_name: str):
         product_info = self.get_product_info(product_name)
-        print(product_info)
 
         if not product_info or product_info[3] <= 1:
             MDSnackbar(
@@ -122,15 +119,11 @@ class CashRegister(MDWidget):
         self.ids.camera.play = False
 
     def scan_qr(self, dt):
-        # get the current frame from the camera
         frame = self.ids.camera.texture
         if frame is not None:
-            # convert the frame to an image
             size = frame.width, frame.height
             img = Image.frombytes("RGBA", size, frame.pixels)
-            img = img.convert("L")  # convert to grayscale
-
-            # scan the image for QR codes
+            img = img.convert("L") 
             codes = decode(img)
             for code in codes:
                 decoded = code.data.decode("utf-8")
@@ -163,7 +156,6 @@ class CashRegister(MDWidget):
             )
             MDApp.get_running_app().conn.commit()
             for index, product_name in enumerate(self.data):
-                print(self.data[product_name])
                 MDApp.get_running_app().cursor.execute(
                     """
                     INSERT INTO check_line (SKU, quantity_sold, line_number, check_id)
@@ -175,6 +167,7 @@ class CashRegister(MDWidget):
                     check_id,
                 )
                 MDApp.get_running_app().conn.commit()
+            self.create_pdf(check_id)
             self.cancel()
 
     def get_unique_check_id(self):
@@ -192,3 +185,60 @@ class CashRegister(MDWidget):
                 random.choices(string.ascii_letters + string.digits, k=15)
             )
         return unique_string
+
+    def create_pdf(self, check_id):
+        c = canvas.Canvas("check.pdf", pagesize=letter)
+        width, height = letter
+
+        data = (
+            MDApp.get_running_app()
+            .cursor.execute(
+                "select * from dbo.check_with_line_products where check_id = ? order by line_number;",
+                check_id,
+            )
+            .fetchall()
+        )
+        c.setFont("Helvetica-Bold", 18)
+        c.drawString(30, height - 50, "Check")
+        c.setFont("Helvetica", 12)
+
+        c.drawString(30, height - 80, "Quantity Sold")
+        c.drawString(130, height - 80, "Product Name")
+        c.drawString(230, height - 80, "Price for one")
+        c.drawString(330, height - 80, "Price for quantity")
+        y = height - 100
+
+        total_price = 0
+        for row in data:
+            (
+                check_id,
+                sale_date,
+                sale_time,
+                line_number,
+                quantity_sold,
+                sku,
+                product_name,
+                price,
+                total_line_price,
+            ) = row
+            c.drawString(30, y, str(quantity_sold))
+            c.drawString(130, y, str(product_name))
+            c.drawString(230, y, str(price))
+            c.drawString(330, y, str(total_line_price))
+            y = y - 20
+            total_price += total_line_price
+
+        c.setFont("Helvetica-Bold", 14)
+        c.drawString(
+            30,
+            y - 40,
+            f"Check ID: {check_id}, Sale Date: {sale_date}, Sale Time: {sale_time}",
+        )
+        c.drawString(
+            30,
+            y - 60,
+            f"Total price: {total_price}",
+        )
+
+        c.save()
+        os.system("check.pdf")

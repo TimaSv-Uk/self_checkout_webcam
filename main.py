@@ -107,8 +107,10 @@ class LoginWindow(Screen):
 class ScanWindow(Screen):
     pass
 
+
 class InvoiceWindow(Screen):
     pass
+
 
 class WindowManager(ScreenManager):
     pass
@@ -154,7 +156,6 @@ class MainApp(MDApp):
             self.cursor = self.conn.cursor()
             self.set_user_role()
             self.change_screen("main")
-            # self.change_screen("catalogue")
 
         except Exception:
             MDSnackbar(
