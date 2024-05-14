@@ -15,7 +15,7 @@ import pyodbc
 class CategoryList(MDWidget):
     def open_category_list(self):
         if not hasattr(self, "data_tables"):
-            products = MDApp.get_running_app().select_as_dick("select * from category;")
+            products = MDApp.get_running_app().select_as_dict("select * from category;")
             self.data_tables = MDDataTable(
                 use_pagination=True,
                 size_hint=(1, 0.6),
@@ -60,7 +60,7 @@ class CategoryList(MDWidget):
             spacing=5,
             size=(self.width, self.height),
         )
-        products = MDApp.get_running_app().select_as_dick("select * from category;")
+        products = MDApp.get_running_app().select_as_dict("select * from category;")
 
         print(products)
         for col_name in products[0].keys():

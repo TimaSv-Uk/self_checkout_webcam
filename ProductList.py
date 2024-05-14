@@ -16,7 +16,7 @@ import qrcode
 class ProductList(MDWidget):
     def open_product_list(self):
         if not hasattr(self, "data_tables"):
-            products = MDApp.get_running_app().select_as_dick("select * from product;")
+            products = MDApp.get_running_app().select_as_dict("select * from product;")
             self.data_tables = MDDataTable(
                 use_pagination=True,
                 size_hint=(1, 0.6),
@@ -25,7 +25,6 @@ class ProductList(MDWidget):
             )
             self.data_tables.bind(on_row_press=self.get_qr_code)
             self.ids.product_list.add_widget(self.data_tables)
-
 
     def add_products(self, *args):
         self.dialog.dismiss()
@@ -67,7 +66,7 @@ class ProductList(MDWidget):
             spacing=5,
             size=(self.width, self.height),
         )
-        products = MDApp.get_running_app().select_as_dick("select * from product;")
+        products = MDApp.get_running_app().select_as_dict("select * from product;")
 
         print(products)
         for col_name in products[0].keys():

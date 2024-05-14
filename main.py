@@ -137,8 +137,8 @@ class MainApp(MDApp):
 
     def connect_to_db(self, username: str, password: str):
         # DRIVER=ODBC Driver 17 for SQL Server;SERVER=GIORNO\SQLEXPRESS;DATABASE=AUTO_CASHIER;
-        # self.USERNAME = username
-        # self.PASSWORD = password
+        self.USERNAME = username
+        self.PASSWORD = password
 
         # text cashier
         # self.PASSWORD = "bob"
@@ -150,6 +150,7 @@ class MainApp(MDApp):
         try:
             file = open("connect.txt", "r")
             connection_string = file.readline()
+            file.close()
             self.conn = pyodbc.connect(
                 connection_string + f"UID={self.USERNAME};PWD={self.PASSWORD}"
             )
@@ -169,7 +170,7 @@ class MainApp(MDApp):
         self.cursor.execute(f"EXEC GET_USER_ROLE '{self.USERNAME}';")
         self.role = self.cursor.fetchone()[0]
 
-    def select_as_dick(self, query: str):
+    def select_as_dict(self, query: str):
         try:
             self.cursor.execute(query)
             records = []
