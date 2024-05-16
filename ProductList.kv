@@ -1,19 +1,15 @@
 <ProductList>:
     size:root.width, root.height
-
     MDBoxLayout:
         id:product_list
         size:root.width, root.height
         orientation: "vertical"
         size_hint: 1, 1
-
+        spacing: 5
         MDBoxLayout:
+            id:product_form
             orientation: "horizontal"
-
             size_hint: 1, 0.1
-            MDRoundFlatButton:
-                text:"add new product"
-                on_press: root.open_new_product_form()
 
         MDBoxLayout:
             id:qr_code_field
@@ -22,3 +18,4 @@
             size_hint: 1, 0.1
             MDLabel:
                 text:"cklick on products SKU in table to get qr code"
+        

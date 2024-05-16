@@ -18,14 +18,13 @@ class CategoryList(MDWidget):
             products = MDApp.get_running_app().select_as_dict("select * from category;")
             self.data_tables = MDDataTable(
                 use_pagination=True,
-                size_hint=(1, 0.6),
+                size_hint=(1, 0.7),
                 column_data=[(col_name, dp(70)) for col_name in products[0].keys()],
                 row_data=[(list(pr.values())) for pr in products],
             )
             self.ids.category_list.add_widget(self.data_tables)
 
     def add_products(self, *args):
-        self.dialog.dismiss()
         try:
             new_product = [
                 widget.text
@@ -55,24 +54,19 @@ class CategoryList(MDWidget):
             ).open()
 
     def open_new_category_form(self):
-        self.new_product_form = MDBoxLayout(
-            orientation="horizontal",
-            spacing=5,
-            size=(self.width, self.height),
-        )
-        products = MDApp.get_running_app().select_as_dict("select * from category;")
-
-        print(products)
-        for col_name in products[0].keys():
-            self.new_product_form.add_widget(
-                MDTextField(required=True, hint_text=col_name, id=col_name)
+        if not hasattr(self, "new_product_form"):
+            self.new_product_form = MDBoxLayout(
+                orientation="horizontal",
+                spacing=5,
+                size=(self.width, self.height),
             )
-        self.new_product_form.add_widget(
-            MDFlatButton(text="add", on_press=self.add_products)
-        )
-        self.dialog = MDDialog(
-            auto_dismiss=True,
-            type="custom",
-            content_cls=self.new_product_form,
-        )
-        self.dialog.open()
+            products = MDApp.get_running_app().select_as_dict("select * from category;")
+
+            for col_name in products[0].keys():
+                self.new_product_form.add_widget(
+                    MDTextField(required=True, hint_text=col_name, id=col_name)
+                )
+            self.new_product_form.add_widget(
+                MDFlatButton(text="add", on_press=self.add_products)
+            )
+            self.ids.product_form.add_widget(self.new_product_form)

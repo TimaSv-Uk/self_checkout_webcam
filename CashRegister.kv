@@ -27,13 +27,13 @@
                         width: 2
                         rectangle: self.x, self.y, self.width, self.height
                 padding: 10
-                Camera:
-                    id: camera
-                    resolution: (640, 480)
-                    play: False
-                ToggleButton:
-                    text: 'Play'
-                    on_press: root.toggle_cam()
+                # Camera:
+                #     id: camera
+                #     resolution: (640, 480)
+                #     play: False
+                # ToggleButton:
+                #     text: 'Play'
+                #     on_press: root.toggle_cam()
                 MDLabel:
                     id:selected_product
                     text: "Info on product"
@@ -42,7 +42,7 @@
                     hint_text: "SKU/name"
                 MDRoundFlatButton:
                     text: "add product by SKU/name"
-                    font_size: 12
+                    font_size: 20
                     pos_hint: {'center_x': .5}
                     on_press: root.add_product_to_check(prod_sku.text.strip())
             MDScrollView:

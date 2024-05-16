@@ -16,6 +16,8 @@ WindowManager:
         name:"register_cashier"
     InvoiceWindow:
         name:"invoice"
+    AnalyticsWindow:
+        name:"analytics"
     Menu:
         name:"menu"
 
@@ -69,6 +71,17 @@ WindowManager:
         Menu:
             size_hint_y: 0.1
         InvoiceList:
+
+<AnalyticsWindow>:
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint_y: 1
+
+        Menu:
+            size_hint_y: 0.1
+        Analytics:
+            id:Analytics
+
 
 <RegisterCashierWindow>:
     MDBoxLayout:

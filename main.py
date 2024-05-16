@@ -13,6 +13,7 @@ from CategoryList import CategoryList
 from SupplierList import SupplierList
 from ProductList import ProductList
 from RegisterCashier import RegisterCashier
+from Analytics import Analytics
 
 
 class Menu(Screen):
@@ -67,6 +68,11 @@ class Menu(Screen):
                     lambda x: self.open_screan("register_cashier"),
                     "manage cashier",
                 ],
+                [
+                    "poll",
+                    lambda x: self.open_screan("analytics"),
+                    "analytics",
+                ],
             ]
 
     def open_screan(self, screan_name: str):
@@ -79,21 +85,34 @@ class Menu(Screen):
 class ManufacturerWindow(Screen):
     def on_pre_enter(self):
         self.ids.ManufacturerList.open_manufacturer_list()
+        self.ids.ManufacturerList.open_new_manufacturer_form()
 
 
 class SupplierWindow(Screen):
     def on_pre_enter(self):
-        self.ids.SupplierList.open_manufacturer_list()
+        self.ids.SupplierList.open_supplier_list()
+        self.ids.SupplierList.open_new_supplier_form()
 
 
 class CategoryWindow(Screen):
     def on_pre_enter(self):
         self.ids.CategoryList.open_category_list()
+        self.ids.CategoryList.open_new_category_form()
 
 
 class CatalogWindow(Screen):
     def on_pre_enter(self):
         self.ids.ProductList.open_product_list()
+        self.ids.ProductList.open_new_product_form()
+
+class AnalyticsWindow(Screen):
+    def on_pre_enter(self):
+        self.ids.Analytics.open_table(
+            "supplier_deliveries", "Кількість доставки від постачальника"
+        )
+        self.ids.Analytics.open_table(
+            "product_sales", "Всі продажи для кожного продукту"
+        )
 
 
 class RegisterCashierWindow(Screen):
@@ -124,6 +143,7 @@ Builder.load_file("CategoryList.kv")
 Builder.load_file("InvoiceList.kv")
 Builder.load_file("CashRegister.kv")
 Builder.load_file("RegisterCashier.kv")
+Builder.load_file("Analytics.kv")
 
 
 class MainApp(MDApp):

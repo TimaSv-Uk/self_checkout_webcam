@@ -42,7 +42,7 @@ class InvoiceList(MDWidget):
         )
         check_item.add_widget(
             MDTextField(
-                id="measurement_unit", hint_text="measurement unit", max_text_length=10
+                id="measurement_unit", hint_text="unit", max_text_length=10
             )
         )
         check_item.add_widget(
