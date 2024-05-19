@@ -73,7 +73,7 @@ class ProductList(MDWidget):
                     MDTextField(required=True, hint_text=col_name, id=col_name)
                 )
             self.new_product_form.add_widget(
-                MDFillRoundFlatButton(text="add", on_press=self.add_products)
+                MDFillRoundFlatButton(text="додати", on_press=self.add_products)
             )
             self.ids.product_form.add_widget(self.new_product_form)
 

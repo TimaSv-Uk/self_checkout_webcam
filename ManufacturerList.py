@@ -72,6 +72,6 @@ class ManufacturerList(MDWidget):
                 )
 
             self.new_manufacturer_form.add_widget(
-                MDFillRoundFlatButton(text="add", on_press=self.add_products)
+                MDFillRoundFlatButton(text="додати", on_press=self.add_products)
             )
             self.ids.product_form.add_widget(self.new_manufacturer_form)

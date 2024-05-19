@@ -21,6 +21,12 @@
                 orientation: "vertical" 
                 size_hint_y: None
                 height: self.minimum_height 
+                canvas.before:
+                    Color:
+                        rgba: .5, .5, .5, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
         MDBoxLayout:
             orientation: "vertical"
             size_hint_x: .3

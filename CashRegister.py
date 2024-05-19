@@ -176,13 +176,13 @@ class CashRegister(MDWidget):
         )
         check_ids = [id[0] for id in check_ids.fetchall()]
         unique_string = "".join(
-            random.choices(string.ascii_letters + string.digits, k=15)
+            random.choices(string.digits, k=15)
         )
         while True:
             if unique_string not in check_ids:
                 break
             unique_string = "".join(
-                random.choices(string.ascii_letters + string.digits, k=15)
+                random.choices(string.digits, k=15)
             )
         return unique_string
 
