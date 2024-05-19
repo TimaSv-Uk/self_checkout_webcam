@@ -19,20 +19,10 @@
             MDBoxLayout:
                 id:invoice_list
                 orientation: "vertical" 
-
                 size_hint_y: None
-                height: self.minimum_height  # Set the height to allow scrolling
-                canvas.before:
-                    Color:
-                        rgba: .5, .5, .5, 1
-                    Line:
-                        width: 2
-                        rectangle: self.x, self.y, self.width, self.height
-
-
+                height: self.minimum_height 
         MDBoxLayout:
             orientation: "vertical"
-
             size_hint_x: .3
             MDBoxLayout:
                 orientation: "vertical"
@@ -45,15 +35,15 @@
                 padding: 10
                 MDTextField:
                     id:prod_sku
-                    hint_text: "SKU/name"
+                    hint_text: "SKU/назвою"
                 MDRoundFlatButton:
-                    text: "add product toinvoice by SKU/name"
+                    text: "додати товар до накладна за SKU/назвою"
                     font_size: 12
                     pos_hint: {'center_x': .5}
                     on_press: root.add_invoice_line(prod_sku.text.strip())
             Button: 
                 on_press:root.add_invoice()
-                text:"Add invoice"
+                text:"Додати накладна"
             Button: 
-                text:"Cansel"
+                text:"Скасувати"
                 on_press: root.cancel()

@@ -123,7 +123,7 @@ class CashRegister(MDWidget):
         if frame is not None:
             size = frame.width, frame.height
             img = Image.frombytes("RGBA", size, frame.pixels)
-            img = img.convert("L") 
+            img = img.convert("L")
             codes = decode(img)
             for code in codes:
                 decoded = code.data.decode("utf-8")
@@ -241,4 +241,5 @@ class CashRegister(MDWidget):
         )
 
         c.save()
-        os.system("check.pdf")
+        os.startfile("check.pdf")
+        return

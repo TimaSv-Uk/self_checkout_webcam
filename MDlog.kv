@@ -10,10 +10,10 @@
             spacing: 25
             orientation: 'vertical'
             MDLabel:
-                text: 'WELCOM'
+                text: 'УВІЙТИ'
             MDTextField:
                 id: user
-                hint_text: "username"
+                hint_text: "ім'я користувача"
                 size_hint_x: None
                 required: True
                 width: 200
@@ -23,7 +23,7 @@
                 pos_hint: {'center_x': .5}
             MDTextField:
                 id: password
-                hint_text: "password"
+                hint_text: "пароль"
                 password:True
                 required: True
                 size_hint_x: None
@@ -33,12 +33,7 @@
                 padding: 25
                 pos_hint: {'center_x': .5}
             MDRoundFlatButton:
-                text: "LOG IN"
-                font_size: 12
+                text: "УВІЙТИ"
+                font_size: 16
                 pos_hint: {'center_x': .5}
                 on_press: root.login()
-            MDRoundFlatButton:
-                text: "CLEAR"
-                font_size: 12
-                pos_hint: {'center_x': .5}
-                on_press: root.clear()

@@ -5,7 +5,9 @@
             orientation: "horizontal"
             padding: 25
             spacing: 25
-            pos_hint: {'center_x': 0.65, 'center_y': 0.5}
+            size:root.width*0.9, root.height*0.9
+            size_hint: None, None
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
             MDCard:
                 size_hint: None, None
                 size: 300,400
@@ -15,10 +17,10 @@
                 spacing: 25
                 orientation: 'vertical'
                 MDLabel:
-                    text: 'add cashier'
+                    text: 'додати касира'
                 MDTextField:
                     id: user
-                    hint_text: "new cashier"
+                    hint_text: "ім'я касира"
                     size_hint_x: None
                     required: True
                     width: 200
@@ -38,15 +40,10 @@
                     padding: 25
                     pos_hint: {'center_x': .5}
                 MDRoundFlatButton:
-                    text: "REGISTER CASHIER"
-                    font_size: 12
+                    text: "додати"
+                    font_size: 16
                     pos_hint: {'center_x': .5}
                     on_press: root.register_cashier()
-                MDRoundFlatButton:
-                    text: "CLEAR"
-                    font_size: 12
-                    pos_hint: {'center_x': .5}
-                    on_press: root.clear()
             MDCard:
                 size_hint: None, None
                 size: 300,400
@@ -56,10 +53,10 @@
                 spacing: 25
                 orientation: 'vertical'
                 MDLabel:
-                    text: 'delete cashier'
+                    text: 'видалити касира'
                 MDTextField:
                     id: remove_user_name
-                    hint_text: "remove with name"
+                    hint_text: "ім'я"
                     size_hint_x: None
                     required: True
                     width: 200
@@ -68,12 +65,7 @@
                     padding: 25
                     pos_hint: {'center_x': .5}
                 MDRoundFlatButton:
-                    text: "DELETE CASHIER"
-                    font_size: 12
+                    text: "видалити"
+                    font_size: 16
                     pos_hint: {'center_x': .5}
                     on_press: root.delete_cashier()
-                MDRoundFlatButton:
-                    text: "CLEAR"
-                    font_size: 12
-                    pos_hint: {'center_x': .5}
-                    on_press: root.clear()

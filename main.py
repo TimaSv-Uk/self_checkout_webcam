@@ -23,12 +23,12 @@ class Menu(Screen):
                 [
                     "cash-register",
                     lambda x: self.open_screan("main"),
-                    "main",
+                    "Термінал",
                 ],
                 [
                     "list-box",
                     lambda x: self.open_screan("catalogue"),
-                    "catalogue",
+                    "Товари",
                 ],
             ]
         elif MDApp.get_running_app().role == "Manager":
@@ -36,49 +36,49 @@ class Menu(Screen):
                 [
                     "cash-register",
                     lambda x: self.open_screan("main"),
-                    "main",
+                    "Термінал",
                 ],
                 [
                     "list-box",
                     lambda x: self.open_screan("catalogue"),
-                    "catalogue",
+                    "Товари",
                 ],
                 [
                     "format-list-bulleted-square",
                     lambda x: self.open_screan("invoice"),
-                    "add invoice",
+                    "Накладна",
                 ],
                 [
                     "factory",
                     lambda x: self.open_screan("manufacturer"),
-                    "add manufacturer",
+                    "Виробник",
                 ],
                 [
                     "account-cash",
                     lambda x: self.open_screan("supplier"),
-                    "add supplier",
+                    "Постачальник",
                 ],
                 [
                     "shape",
                     lambda x: self.open_screan("category"),
-                    "add category",
+                    "Категорія",
                 ],
                 [
                     "account-plus",
                     lambda x: self.open_screan("register_cashier"),
-                    "manage cashier",
+                    "Додати касира",
                 ],
                 [
                     "poll",
                     lambda x: self.open_screan("analytics"),
-                    "analytics",
+                    "Звітність про продажі",
                 ],
             ]
 
     def open_screan(self, screan_name: str):
         MDApp.get_running_app().change_screen(screan_name)
         self.ids.app_bar.right_action_items = [
-            ["menu", lambda x: self.get_menu_items(), "menu"],
+            ["menu", lambda x: self.get_menu_items(), "Меню"],
         ]
 
 
@@ -105,6 +105,7 @@ class CatalogWindow(Screen):
         self.ids.ProductList.open_product_list()
         self.ids.ProductList.open_new_product_form()
 
+
 class AnalyticsWindow(Screen):
     def on_pre_enter(self):
         self.ids.Analytics.open_table(
@@ -124,7 +125,11 @@ class LoginWindow(Screen):
 
 
 class ScanWindow(Screen):
-    pass
+    def on_leave(self):
+        try:
+            self.ids.CashRegister.stop_cam()
+        except Exception:
+            print("Can't close camera")
 
 
 class InvoiceWindow(Screen):
@@ -150,6 +155,7 @@ class MainApp(MDApp):
     role = ""
 
     def build(self):
+        self.title = "Auto cashier"
         return Builder.load_file("screen_manager.kv")
 
     def change_screen(self, screan_name: str):
@@ -181,7 +187,7 @@ class MainApp(MDApp):
         except Exception:
             MDSnackbar(
                 MDLabel(
-                    text="Invalid user name or password",
+                    text="Неправильне ім'я користувача або пароль",
                 ),
             ).open()
 
@@ -197,10 +203,10 @@ class MainApp(MDApp):
             columns = [column[0] for column in self.cursor.description]
             records = [dict(zip(columns, row)) for row in self.cursor.fetchall()]
             return records
-        except Exception:
+        except Exception as e:
             MDSnackbar(
                 MDLabel(
-                    text="Error",
+                    text=f"Помилка {e}",
                 ),
             ).open()
             return []

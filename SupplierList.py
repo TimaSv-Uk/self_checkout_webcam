@@ -7,7 +7,7 @@ from kivy.metrics import dp
 from kivymd.uix.snackbar import MDSnackbar
 from kivymd.uix.label import MDLabel
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.button import MDFlatButton
+from kivymd.uix.button import MDFillRoundFlatButton
 
 import pyodbc
 
@@ -44,12 +44,12 @@ class SupplierList(MDWidget):
             self.data_tables.add_row(new_product)
         except pyodbc.IntegrityError as e:
             MDSnackbar(
-                MDLabel(text=f"Invalid data: {e}"),
+                MDLabel(text=f"Неправильні дані: {e}"),
             ).open()
         except Exception:
             MDSnackbar(
                 MDLabel(
-                    text="Error, open data table first",
+                    text="Помилка, спочатку відкрийте таблицю даних",
                 ),
             ).open()
 
@@ -67,6 +67,6 @@ class SupplierList(MDWidget):
                     MDTextField(required=True, hint_text=col_name, id=col_name)
                 )
             self.new_supplier_form.add_widget(
-                MDFlatButton(text="add", on_press=self.add_products)
+                MDFillRoundFlatButton(text="add", on_press=self.add_products)
             )
             self.ids.product_form.add_widget(self.new_supplier_form)

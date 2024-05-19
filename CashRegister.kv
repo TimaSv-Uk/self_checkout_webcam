@@ -12,13 +12,9 @@
         orientation: "horizontal"
         padding: 10
         size:root.width, root.height
-
         MDBoxLayout:
-
             orientation: "horizontal"
-
             MDBoxLayout:
-
                 orientation: "vertical"
                 canvas.before:
                     Color:
@@ -36,12 +32,12 @@
                 #     on_press: root.toggle_cam()
                 MDLabel:
                     id:selected_product
-                    text: "Info on product"
+                    text: "Інформація про товар"
                 MDTextField:
                     id:prod_sku
-                    hint_text: "SKU/name"
+                    hint_text: "SKU/назва"
                 MDRoundFlatButton:
-                    text: "add product by SKU/name"
+                    text: "додати товар за SKU/назва"
                     font_size: 20
                     pos_hint: {'center_x': .5}
                     on_press: root.add_product_to_check(prod_sku.text.strip())
@@ -63,7 +59,7 @@
                 orientation: "vertical"
                 Button: 
                     on_press:root.get_check()
-                    text:"Get check"
+                    text:"Отримати чек"
                 Button: 
-                    text:"Cansel"
+                    text:"Скасувати"
                     on_press: root.cancel()

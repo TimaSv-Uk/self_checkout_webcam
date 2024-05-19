@@ -1,7 +1,9 @@
 <Analytics>:
-    size:root.width, root.height
-    MDBoxLayout:
-        id: analytics_layout
+    FloatLayout:
         size:root.width, root.height
-        orientation: "vertical"
-        size_hint: 1, 1
+        MDBoxLayout:
+            id: analytics_layout
+            size:root.width*0.9, root.height*0.9
+            orientation: "vertical"
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}

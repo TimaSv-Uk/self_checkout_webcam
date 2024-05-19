@@ -22,7 +22,7 @@ class InvoiceList(MDWidget):
         if not invoice_info:
             MDSnackbar(
                 MDLabel(
-                    text="No such product in product list",
+                    text="Немає такого продукту в списку товарів",
                 ),
             ).open()
             return
@@ -106,14 +106,14 @@ class InvoiceList(MDWidget):
                     print(e)
                     MDSnackbar(
                         MDLabel(
-                            text=f"Invalid input {e}",
+                            text=f"Неправильні дані {e}",
                         ),
                     ).open()
                     return
             self.cancel()
             MDSnackbar(
                 MDLabel(
-                    text=f"Invoice with id {invoice_id} was added",
+                    text=f"Додано накладну з id: {invoice_id}",
                 ),
             ).open()
 

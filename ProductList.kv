@@ -1,21 +1,21 @@
 <ProductList>:
-    size:root.width, root.height
-    MDBoxLayout:
-        id:product_list
+    FloatLayout:
         size:root.width, root.height
-        orientation: "vertical"
-        size_hint: 1, 1
-        spacing: 5
         MDBoxLayout:
-            id:product_form
-            orientation: "horizontal"
-            size_hint: 1, 0.1
-
-        MDBoxLayout:
-            id:qr_code_field
+            id:product_list
             orientation: "vertical"
-
-            size_hint: 1, 0.1
-            MDLabel:
-                text:"cklick on products SKU in table to get qr code"
+            size:root.width*0.9, root.height*0.9
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            spacing: 5
+            MDBoxLayout:
+                id:product_form
+                orientation: "horizontal"
+                size_hint: 1, 0.1
+            MDBoxLayout:
+                id:qr_code_field
+                orientation: "vertical"
+                size_hint: 1, 0.1
+                MDLabel:
+                    text:"натисніть SKU в таблиці, щоб отримати qr-код продукту"
         

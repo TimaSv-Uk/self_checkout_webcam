@@ -1,14 +1,15 @@
 <CategoryList>:
-    size:root.width, root.height
-
-    MDBoxLayout:
-        id:category_list
+    FloatLayout:
         size:root.width, root.height
-        orientation: "vertical"
-        size_hint: 1, 1
-
         MDBoxLayout:
-            id:product_form
-            orientation: "horizontal"
-            size_hint: 1, 0.1
+            id:category_list
+            size:root.width*0.9, root.height*0.9
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            orientation: "vertical"
+
+            MDBoxLayout:
+                id:product_form
+                orientation: "horizontal"
+                size_hint: 1, 0.1
 
