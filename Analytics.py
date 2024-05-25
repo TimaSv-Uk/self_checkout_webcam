@@ -7,10 +7,10 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFillRoundFlatButton
 
-from docx import Document
-from pandas import DataFrame
 import pyodbc
 import os
+from docx import Document
+from pandas import DataFrame
 from docx2pdf import convert
 from plyer import filechooser
 

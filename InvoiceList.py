@@ -11,11 +11,12 @@ from pyzbar.pyzbar import decode
 import random
 import string
 import datetime
+from kivy.uix.spinner import Spinner
 
 
 class InvoiceList(MDWidget):
     data = {}
-    invoice_on_screan = {}
+    invoice_on_screen = {}
 
     def add_invoice_line(self, product_name: str):
         invoice_info = self.get_product_info(product_name)
@@ -41,9 +42,7 @@ class InvoiceList(MDWidget):
             MDTextField(id="supplier_id", hint_text="supplier id", max_text_length=3)
         )
         check_item.add_widget(
-            MDTextField(
-                id="measurement_unit", hint_text="unit", max_text_length=10
-            )
+            MDTextField(id="measurement_unit", hint_text="unit", max_text_length=10)
         )
         check_item.add_widget(
             MDTextField(
@@ -57,14 +56,14 @@ class InvoiceList(MDWidget):
                 input_filter="int",
             )
         )
-        self.invoice_on_screan[product_name] = check_item
-
+        
         self.ids.invoice_list.add_widget(check_item)
+        self.invoice_on_screen[product_name] = check_item
 
     def cancel(self):
-        for _, wdg in self.invoice_on_screan.items():
+        for _, wdg in self.invoice_on_screen.items():
             self.ids.invoice_list.remove_widget(wdg)
-        self.invoice_on_screan = {}
+        self.invoice_on_screen = {}
         self.data = {}
 
     def add_invoice(self):
@@ -80,8 +79,8 @@ class InvoiceList(MDWidget):
                 datetime.datetime.now().time(),
             )
             MDApp.get_running_app().conn.commit()
-            for index, invoice_name in enumerate(self.invoice_on_screan):
-                for child in self.invoice_on_screan[invoice_name].children:
+            for index, invoice_name in enumerate(self.invoice_on_screen):
+                for child in self.invoice_on_screen[invoice_name].children:
                     if isinstance(child, MDTextField):
                         widget_id = child.id
                         text = child.text
@@ -122,15 +121,11 @@ class InvoiceList(MDWidget):
             "select invoice_id from invoice;"
         )
         check_ids = [id[0] for id in check_ids.fetchall()]
-        unique_string = "".join(
-            random.choices(string.digits, k=9)
-        )
+        unique_string = "".join(random.choices(string.digits, k=9))
         while True:
             if unique_string not in check_ids:
                 break
-            unique_string = "".join(
-                random.choices(string.digits, k=15)
-            )
+            unique_string = "".join(random.choices(string.digits, k=15))
         return unique_string
 
     def get_product_info(self, sku: str):
