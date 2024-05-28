@@ -23,13 +23,13 @@
                         width: 2
                         rectangle: self.x, self.y, self.width, self.height
                 padding: 10
-                # Camera:
-                #     id: camera
-                #     resolution: (640, 480)
-                #     play: False
-                # ToggleButton:
-                #     text: 'Сканувати qr-код'
-                #     on_press: root.toggle_cam()
+                Camera:
+                    id: camera
+                    resolution: (640, 480)
+                    play: False
+                ToggleButton:
+                    text: 'Сканувати qr-код'
+                    on_press: root.toggle_cam()
                 MDLabel:
                     id:selected_product
                     text: "Інформація про товар"

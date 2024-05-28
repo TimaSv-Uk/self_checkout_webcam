@@ -28,7 +28,7 @@ class CashRegister(MDWidget):
         if not product_info or product_info[3] <= 1:
             MDSnackbar(
                 MDLabel(
-                    text="Product in check or there no such product",
+                    text="Товар уже додано до чеку або такого товару немає",
                 ),
             ).open()
             return
@@ -94,7 +94,7 @@ class CashRegister(MDWidget):
             else:
                 MDSnackbar(
                     MDLabel(
-                        text="Not enoght product in stock",
+                        text="Недостатньо товару на складі",
                     ),
                 ).open()
 
@@ -175,15 +175,11 @@ class CashRegister(MDWidget):
             "select сheck_id from final_сheck;"
         )
         check_ids = [id[0] for id in check_ids.fetchall()]
-        unique_string = "".join(
-            random.choices(string.digits, k=15)
-        )
+        unique_string = "".join(random.choices(string.digits, k=15))
         while True:
             if unique_string not in check_ids:
                 break
-            unique_string = "".join(
-                random.choices(string.digits, k=15)
-            )
+            unique_string = "".join(random.choices(string.digits, k=15))
         return unique_string
 
     def create_pdf(self, check_id):
